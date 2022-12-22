@@ -4,7 +4,7 @@
   "description": "Improved master picker for LiU",
   "main": "index.js",
   "scripts": {
-    "build": "echo 'Placeholder building"
+    "build": "echo 'Placeholder building'"
   },
   "repository": {
     "type": "git",
