@@ -1,0 +1,84 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+    --select-border: #777;
+    --select-focus: blue;
+    --select-arrow: var(--select-border);
+  }
+
+.header-grid {
+    grid-area: header;
+}
+
+.content-grid {
+    grid-area: main;
+}
+
+.right-grid {
+    grid-area: right;
+}
+
+.footer-grid {
+    grid-area: footer;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-areas:
+        'header header header header header header'
+        'main main main main right right'
+        'footer footer footer footer footer footer';
+    gap: 10px;
+    background-color: #2196F3;
+    padding: 10px;
+}
+
+.grid-container>div {
+    background-color: #d7e5fc;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+body {
+    color: rgba(0, 0, 0, 0.87);
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#load {
+    color: rgba(0, 0, 0, 0.4);
+    text-align: center;
+    font-size: 13px;
+}
+
+select {
+    padding: 0 1em 0 0;
+    margin: 0;
+    width: 10%;
+    font-family: inherit;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+
+    body,
+    #message {
+        margin-top: 0;
+        background: white;
+        box-shadow: none;
+    }
+
+    body {
+        border-top: 16px solid #ffa100;
+    }
+}
