@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <title>Welcome to Firebase Hosting</title>
+    <title>Masterpicker for Engineers at LiU</title>
 
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/9.15.0/firebase-app-compat.js"></script>
@@ -23,7 +23,7 @@
       initialize the SDK after all desired features are loaded, set useEmulator to false
       to avoid connecting the SDK to running emulators.
     -->
-    <script defer src="/__/firebase/init.js?useEmulator=false"></script>
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
     <script type="text/javascript" src="js/sort.js"></script>
     <script type="text/javascript" src="js/populateSelect.js"></script>
   </head>
@@ -97,6 +97,7 @@
             'performance',
           ].filter(feature => typeof app[feature] === 'function');
           loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
+          populateSelect('programmes', 'programSelect')
         } catch (e) {
           console.error(e);
           loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
@@ -111,7 +112,10 @@
             // Now that you have the data, create an option element for each item
             var option = document.createElement('option');
             option.value = doc.id;  // Set the value of the option to the document ID
-            option.text = doc.data().name;  // Set the text of the option to the name field of the document
+            
+            console.log(doc.id.slice(0,-7))
+            styledText = doc.id.slice(0,-7) + " (" + doc.id.slice(-6,-4).toUpperCase() + " " + doc.id.slice(-4) + ")"
+            option.text = styledText;  // Set the text of the option to the name field of the document
             
             // Append the option to the select element
             document.getElementById(selectId).appendChild(option);
@@ -122,7 +126,7 @@
         });
       }
 
-      window.onload = populateSelect('programmes', 'programSelect');
+      //window.onload = populateSelect('programmes', 'programSelect');
     </script>
   </body>
 </html>
