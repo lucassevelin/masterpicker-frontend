@@ -1,14 +1,15 @@
 function fetchProgramData(program, tableID, selectedCol) {
     var db = firebase.firestore();
-    console.log(program)
-    var programCol = db.collection(db, selectedCol, program, "courses")
+
+    var programCol = db.collection(selectedCol, program, "courses")
+    
     //console.log(programCol)
 
     clearTable(tableID);
     var tableToFill = document.getElementById(tableID).getElementsByTagName('tbody')[0]
-    tableToFill.classList.remove("hidden")
+    document.getElementById(tableID).classList.remove("hidden")
 
-    onSnapshot(programCol, (snapshot) => {
+    programCol.get().then(snapshot => {
         snapshot.docs.forEach((doc) => {
             //console.log("Data is of type: " + doc.data().constructor)
             //console.log("Data is still of type: " + dataToPush.constructor)
@@ -82,3 +83,10 @@ function fetchProgramData(program, tableID, selectedCol) {
     })
     console.log("Done")
 }
+
+function clearTable(tableID) {
+    var Table = document.getElementById(tableID);
+    console.log(Table)
+    Table.innerHTML = "";
+    Table.innerHTML = '<tr><th onclick="sortTable(0)">Course name</th><th onclick="sortTable(1)">Course code</th><th onclick="sortTable(2)">Period</th><th onclick="sortTable(3)">Timetable module</th><th onclick="sortTable(4)">Exam?</th><th onclick="sortTable(5)">Credits</th><th onclick="sortTable(6)">E/C/V</th><th onclick="sortTable(7)">Main field of study</th><th onclick="sortTable(8)">Level</th><th onclick="sortTable(9)">Selected</th></tr>';
+ }
