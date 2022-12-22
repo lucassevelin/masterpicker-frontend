@@ -1,6 +1,6 @@
-function fetchProgramData(program, tableID) {
-    //var programCol = query((selectedCol + "/" + selectedProgram + "/courses")) //, orderBy('term', 'desc'))
+function fetchProgramData(program, tableID, selectedCol) {
     var db = firebase.firestore();
+    console.log(program)
     var programCol = db.collection(db, selectedCol, program, "courses")
     //console.log(programCol)
 
