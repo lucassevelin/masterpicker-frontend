@@ -7,7 +7,6 @@ function fetchProgramData(program, tableID, selectedCol) {
 
     clearTable(tableID);
     var tableToFill = document.getElementById(tableID).getElementsByTagName('tbody')[0]
-    document.getElementById(tableID).classList.remove("hidden")
 
     programCol.get().then(snapshot => {
         snapshot.docs.forEach((doc) => {
@@ -82,6 +81,7 @@ function fetchProgramData(program, tableID, selectedCol) {
         })
     })
     console.log("Done")
+    document.getElementById(tableID).classList.remove("hidden")
 }
 
 function clearTable(tableID) {
@@ -89,4 +89,5 @@ function clearTable(tableID) {
     console.log(Table)
     Table.innerHTML = "";
     Table.innerHTML = '<tr><th onclick="sortTable(0)">Course name</th><th onclick="sortTable(1)">Course code</th><th onclick="sortTable(2)">Period</th><th onclick="sortTable(3)">Timetable module</th><th onclick="sortTable(4)">Exam?</th><th onclick="sortTable(5)">Credits</th><th onclick="sortTable(6)">E/C/V</th><th onclick="sortTable(7)">Main field of study</th><th onclick="sortTable(8)">Level</th><th onclick="sortTable(9)">Selected</th></tr>';
- }
+    document.getElementById(tableID).classList.add("hidden")
+}
