@@ -26,6 +26,7 @@
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
     <script type="text/javascript" src="js/sort.js"></script>
     <script type="text/javascript" src="js/populateSelect.js"></script>
+    <script type="text/javascript" src="js/fetchProgramData.js"></script>
   </head>
   <body>
     <div class="grid-container">
@@ -104,27 +105,8 @@
         }
       });
 
-      function populateSelect(collection, selectId){
-        var db = firebase.firestore();
-        var data = db.collection(collection).get()
-        .then(snapshot => {
-            snapshot.forEach(doc => {
-            // Now that you have the data, create an option element for each item
-            var option = document.createElement('option');
-            option.value = doc.id;  // Set the value of the option to the document ID
-            
-            //console.log(doc.id.slice(0,-8))
-            styledText = doc.id.slice(0,-8) + " (" + doc.id.slice(-7,-5).toUpperCase() + " " + doc.id.slice(-4) + ")"
-            option.text = styledText;  // Set the text of the option to the name field of the document
-            
-            // Append the option to the select element
-            document.getElementById(selectId).appendChild(option);
-            });
-        })
-        .catch(error => {
-            console.log(error);
-        });
-      }
+      document.getElementById('programSelect').addEventListener('change',
+      function(){fetchProgramData(document.getElementById('programSelect').value, programDataTable);})
 
       //window.onload = populateSelect('programmes', 'programSelect');
     </script>
