@@ -6,6 +6,7 @@ function fetchProgramData(program, tableID, selectedCol) {
 
     clearTable(tableID);
     var tableToFill = document.getElementById(tableID).getElementsByTagName('tbody')[0]
+    tableToFill.classList.remove("hidden")
 
     onSnapshot(programCol, (snapshot) => {
         snapshot.docs.forEach((doc) => {
