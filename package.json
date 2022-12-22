@@ -1,0 +1,19 @@
+{
+  "name": "masterpickerfrontend",
+  "version": "1.0.0",
+  "description": "Improved master picker for LiU",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucassevelin/masterpicker-frontend.git"
+  },
+  "author": "Lucas Sevelin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucassevelin/masterpicker-frontend/issues"
+  },
+  "homepage": "https://github.com/lucassevelin/masterpicker-frontend#readme"
+}
