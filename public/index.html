@@ -103,9 +103,6 @@
         }
       });
 
-      // Init firestore
-      initializeApp(firebaseConfig)
-
       function populateSelect(collection, selectId){
         var db = firebase.firestore();
         var data = db.collection(collection).get()
