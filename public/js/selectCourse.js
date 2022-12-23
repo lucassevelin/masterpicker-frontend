@@ -11,7 +11,6 @@ function selectCourse(checkbox) {
         factor = -1;
     }
 
-    console.log(totalHP)
     var row = checkbox.parentElement.parentElement;
     dataCells = row.cells;
 
