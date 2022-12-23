@@ -60,10 +60,10 @@ body {
     font-size: 13px;
 }
 
-#copyright {
+.footer {
     color: rgba(0, 0, 0, 0.4);
     text-align: center;
-    font-size: 10px;
+    font-size: 13px;
 }
 
 #programDataTable tr td {

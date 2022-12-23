@@ -49,12 +49,12 @@ function fetchProgramData(program, tableID, selectedCol) {
 
             var newCell = newRow.insertCell();
             //console.log(doc.data().multiplePeriods)
-            if (doc.data().multiplePeriods) {
+            /*if (doc.data().multiplePeriods) {
                 var newText = document.createTextNode(doc.data().credits);
             } else {
                 var newText = document.createTextNode(String(doc.data().credits + "*"));
-            }
-            newCell.appendChild(newText);
+            }*/
+            newCell.appendChild(document.createTextNode(doc.data().credits));
 
             var newCell = newRow.insertCell();
             var newText = document.createTextNode(doc.data().ECV);
