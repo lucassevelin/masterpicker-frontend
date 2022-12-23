@@ -58,10 +58,13 @@ function fetchProgramData(program, tableID, selectedCol) {
 
             var newCell = newRow.insertCell();
             var cellContentECV;
-            if (doc.data().ECV.length > 1) {
+            if (Object.keys(doc.data().ECV).length > 1) {
+                console.log("ECV contains array")
+                console.log(doc.data().ECV)
                 cellContentECV = fixECV(doc.data().ECV);
             } else {
-                cellContentECV = doc.data().ECV[0]
+                console.log("ECV contains single entry")
+                cellContentECV = Object.values(doc.data().ECV)[0]
             }
             var newText = document.createTextNode(cellContentECV);
             newCell.appendChild(newText);
@@ -93,12 +96,19 @@ function clearTable(tableID) {
     document.getElementById(tableID).classList.add("hidden")
 }
 
-function fixECV(ecvArray) {
-    for (i = 0;i >= ecvArray.length;i++) {
-        ecvArray.append(ECV[i])
+function fixECV(ecvMap) {
+    ecvKey = Array.from(ecvMap)
+    ecvArray = []
+    for (i = 0;i <= Object.keys(ecvMap).length;i++) {
+        ecvArray.push(Object.values(ecvMap)[i])
     }
     var uniqueECV = ecvArray.filter(onlyUnique);
-    var fixedECV = uniqueECV.toString().replace(",", "/")
+    var fixedECV = uniqueECV.toString().replaceAll(",", "/")
+    console.log(fixedECV)
+    if(fixedECV.endsWith("/")) {
+        fixedECV = fixedECV.slice(0,-1)
+    }
+
     return fixedECV
 }
 
