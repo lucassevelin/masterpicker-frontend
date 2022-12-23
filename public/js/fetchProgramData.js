@@ -57,7 +57,13 @@ function fetchProgramData(program, tableID, selectedCol) {
             newCell.appendChild(document.createTextNode(doc.data().credits));
 
             var newCell = newRow.insertCell();
-            var newText = document.createTextNode(doc.data().ECV);
+            var cellContentECV;
+            if (doc.data().ECV.length > 1) {
+                cellContentECV = fixECV(doc.data().ECV);
+            } else {
+                cellContentECV = doc.data().ECV[0]
+            }
+            var newText = document.createTextNode(cellContentECV);
             newCell.appendChild(newText);
 
             var newCell = newRow.insertCell();
@@ -86,3 +92,16 @@ function clearTable(tableID) {
     Table.innerHTML = '<tr><th onclick="sortTable(0)">Course name</th><th onclick="sortTable(1)">Course code</th><th onclick="sortTable(2)">Period</th><th onclick="sortTable(3)">Timetable module</th><th onclick="sortTable(4)">Exam?</th><th onclick="sortTable(5)">Credits</th><th onclick="sortTable(6)">E/C/V</th><th onclick="sortTable(7)">Main field of study</th><th onclick="sortTable(8)">Level</th><th onclick="sortTable(9)">Selected</th></tr>';
     document.getElementById(tableID).classList.add("hidden")
 }
+
+function fixECV(ecvArray) {
+    for (i = 0;i >= ecvArray.length;i++) {
+        ecvArray.append(ECV[i])
+    }
+    var uniqueECV = ecvArray.filter(onlyUnique);
+    var fixedECV = uniqueECV.toString().replace(",", "/")
+    return fixedECV
+}
+
+function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+  }
