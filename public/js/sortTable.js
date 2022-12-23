@@ -1,4 +1,5 @@
-function sortTable(table, col) {
+function sortTable(col) {
+    var table = document.getElementById("programDataTable")
     var rows, switching, i, x, y, shouldSwitch;
     switching = true;
     while (switching) {

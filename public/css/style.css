@@ -60,6 +60,16 @@ body {
     font-size: 13px;
 }
 
+#copyright {
+    color: rgba(0, 0, 0, 0.4);
+    text-align: center;
+    font-size: 10px;
+}
+
+#programDataTable tr td {
+    max-width: 15%;
+}
+
 select {
     padding: 0 1em 0 0;
     margin: 0;

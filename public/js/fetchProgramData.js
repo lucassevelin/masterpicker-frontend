@@ -2,7 +2,6 @@ function fetchProgramData(program, tableID, selectedCol) {
     var db = firebase.firestore();
 
     var programCol = db.collection(selectedCol).doc(program).collection("courses")
-    console.log(programCol)
 
     clearTable(tableID);
     var tableToFill = document.getElementById(tableID).getElementsByTagName('tbody')[0]

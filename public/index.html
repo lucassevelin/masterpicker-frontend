@@ -24,7 +24,7 @@
       to avoid connecting the SDK to running emulators.
     -->
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
-    <script type="text/javascript" src="js/sort.js"></script>
+    <script type="text/javascript" src="js/sortTable.js"></script>
     <script type="text/javascript" src="js/populateSelect.js"></script>
     <script type="text/javascript" src="js/fetchProgramData.js"></script>
   </head>
@@ -42,16 +42,16 @@
       <div class="content-grid">
         <table id="programDataTable" class="hidden">
           <tr>
-            <th onclick="sortTable(programDataTable, 0)">Course name</th>
-            <th onclick="sortTable(programDataTable, 1)">Course code</th>
-            <th onclick="sortTable(programDataTable, 2)">Period</th>
-            <th onclick="sortTable(programDataTable, 3)">Timetable module</th>
-            <th onclick="sortTable(programDataTable, 4)">Exam?</th>
-            <th onclick="sortTable(programDataTable, 5)">Credits</th>
-            <th onclick="sortTable(programDataTable, 6)">E/C/V</th>
-            <th onclick="sortTable(programDataTable, 7)">Main field of study</th>
-            <th onclick="sortTable(programDataTable, 8)">Level</th>
-            <th onclick="sortTable(programDataTable, 9)">Selected</th>
+            <th onclick="sortTable(0)">Course name</th>
+            <th onclick="sortTable(1)">Course code</th>
+            <th onclick="sortTable(2)">Period</th>
+            <th onclick="sortTable(3)">Timetable module</th>
+            <th onclick="sortTable(4)">Exam?</th>
+            <th onclick="sortTable(5)">Credits</th>
+            <th onclick="sortTable(6)">E/C/V</th>
+            <th onclick="sortTable(7)">Main field of study</th>
+            <th onclick="sortTable(8)">Level</th>
+            <th onclick="sortTable(9)">Selected</th>
           </tr>
         </table>
       </div>
@@ -59,7 +59,8 @@
 
       </div>
       <div class="footer-grid">
-        <p id="load">Firebase SDK Loading&hellip;</p>
+        <p id="load">Firebase SDK Loading&hellip;</p> 
+        <p id="copyright"> © Lucas Sevelin  <span id="copyrightYear"></span></p>
       </div>
     </div>
 
@@ -67,6 +68,9 @@
 
 
     <script>
+      document.getElementById("copyrightYear").innerHTML =  new Date().getFullYear();
+
+
       document.addEventListener('DOMContentLoaded', function() {
         const loadEl = document.querySelector('#load');
         // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
