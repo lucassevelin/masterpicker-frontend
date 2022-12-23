@@ -71,12 +71,8 @@ function fetchProgramData(program, tableID, selectedCol) {
             var newCell = newRow.insertCell();
             var newCheckbox = document.createElement("input");
             newCheckbox.type = "checkbox";
-            newCheckbox.setAttribute("onClick", "colorRow(this)");
+            newCheckbox.setAttribute("onClick", "selectCourse(this)");
             newCell.appendChild(newCheckbox);
-            // if(doc.data().ECV.startsWith("E")) {
-            //     newCheckbox.checked = true;
-            //     colorRow(newCheckbox)
-            // }
         })
     })
     console.log("Done!")
