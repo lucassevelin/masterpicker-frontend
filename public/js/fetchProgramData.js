@@ -110,10 +110,9 @@ function fixECV(ecvMap) {
     for (i, val in enumerate(uniqueECV)) {
         if (i = 0) {
             break;
-        } else if (i == uniqueECV.length)
-            break;
-        else {
+        } else {
             if (uniqueECV[i-1].includes(val))
+                console.log("Found extra E, removing")
                 uniqueECV.pop(i)
         }
     }
@@ -126,10 +125,6 @@ function fixECV(ecvMap) {
     }
     return fixedECV
 }
-
-function onlyUnique(value, index, self) {
-    return self.indexOf(value) === index;
-  }
 
 const filterUnique = arr => arr
   .filter(str => new Set(str).size === str.length);
