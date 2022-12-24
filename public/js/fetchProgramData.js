@@ -58,7 +58,7 @@ function fetchProgramData(program, tableID, selectedCol) {
 
             var newCell = newRow.insertCell();
             var cellContentECV;
-            console.log(doc.data().ECV)
+            console.log(doc.data().ecv)
             if (doc.data().ECV == null){
                 console.log("Error") 
             } else if (Object.keys(doc.data().ECV).length > 1) {
