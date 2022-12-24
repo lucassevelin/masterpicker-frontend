@@ -58,7 +58,7 @@ function fetchProgramData(program, tableID, selectedCol) {
 
             var newCell = newRow.insertCell();
             var cellContentECV;
-            console.log("Raw data: " + doc.data().ecv)
+            //console.log("Raw data: " + doc.data().ecv)
             if (doc.data().ecv == null){
                 console.log("Error when loading ECV data") 
             } else if (Object.keys(doc.data().ecv).length > 1) {
@@ -106,8 +106,9 @@ function fixECV(ecvMap) {
         ecvArray.push(Object.values(ecvMap)[i])
     }
     var uniqueECV = ecvArray.filter(onlyUnique).sort();
+    console.log("Unique array: " + uniqueECV.toString())
     var fixedECV = uniqueECV.toString().replaceAll(",", "/")
-    console.log(fixedECV)
+    console.log("Fixed string:" + fixedECV)
     if(fixedECV.endsWith("/")) {
         fixedECV = fixedECV.slice(0,-1)
     }

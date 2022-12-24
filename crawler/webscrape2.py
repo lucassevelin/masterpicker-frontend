@@ -28,6 +28,27 @@ def add_commas(s, words):
   # Return the result list as a comma-separated string
   return result
 
+def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = "\r"):
+    """
+    Call in a loop to create terminal progress bar
+    @params:
+        iteration   - Required  : current iteration (Int)
+        total       - Required  : total iterations (Int)
+        prefix      - Optional  : prefix string (Str)
+        suffix      - Optional  : suffix string (Str)
+        decimals    - Optional  : positive number of decimals in percent complete (Int)
+        length      - Optional  : character length of bar (Int)
+        fill        - Optional  : bar fill character (Str)
+        printEnd    - Optional  : end character (e.g. "\r", "\r\n") (Str)
+    """
+    percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
+    filledLength = int(length * iteration // total)
+    bar = fill * filledLength + '-' * (length - filledLength)
+    print(f'\r{prefix} |{bar}| {percent}% {suffix}', end = printEnd)
+    # Print New Line on Complete
+    if iteration == total: 
+        print()
+
 url = input("Please input a programe page to scrape, page must be in english: ")
 page = requests.get(url)
 soup = BeautifulSoup(page.text, "html.parser")
@@ -112,7 +133,8 @@ for row in numRows:
 
 print("Done scraping main table")
 
-for link in courseLink: # Go through all courses individual webpage
+printProgressBar(0, len(courseLink), prefix='Progress:', suffix='Complete', length=50)
+for i, link in enumerate(courseLink): # Go through all courses individual webpage
     coursePage = requests.get(link)
     pageCrawl = BeautifulSoup(coursePage.text, "html.parser")
 
@@ -158,8 +180,9 @@ for link in courseLink: # Go through all courses individual webpage
                     #print(ecvData.find_all('td')[7].find('span').contents[0].translate({ord(c): None for c in string.whitespace}) + " for all specializations")
     if not tempECV:
         tempECV.update({"All": "-"})
-    print(tempECV)
+    #print(tempECV)
     ecv.append(tempECV)
+    printProgressBar(i+1, len(courseLink), prefix='Progress:', suffix='Complete', length=50)
 
 print("Done adding exam form and ecv data")
 
