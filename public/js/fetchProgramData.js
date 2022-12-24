@@ -58,16 +58,16 @@ function fetchProgramData(program, tableID, selectedCol) {
 
             var newCell = newRow.insertCell();
             var cellContentECV;
-            console.log(doc.data().ecv)
-            if (doc.data().ECV == null){
+            console.log("Raw data: " + doc.data().ecv)
+            if (doc.data().ecv == null){
                 console.log("Error") 
-            } else if (Object.keys(doc.data().ECV).length > 1) {
+            } else if (Object.keys(doc.data().ecv).length > 1) {
                 console.log("ECV contains array")
-                console.log(doc.data().ECV)
-                cellContentECV = fixECV(doc.data().ECV);
+                console.log(doc.data().ecv)
+                cellContentECV = fixECV(doc.data().ecv);
             } else {
                 console.log("ECV contains single entry")
-                cellContentECV = Object.values(doc.data().ECV)[0]
+                cellContentECV = Object.values(doc.data().ecv)[0]
             }
             var newText = document.createTextNode(cellContentECV);
             newCell.appendChild(newText);
