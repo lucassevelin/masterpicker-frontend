@@ -60,13 +60,13 @@ function fetchProgramData(program, tableID, selectedCol) {
             var cellContentECV;
             console.log("Raw data: " + doc.data().ecv)
             if (doc.data().ecv == null){
-                console.log("Error") 
+                console.log("Error when loading ECV data") 
             } else if (Object.keys(doc.data().ecv).length > 1) {
-                console.log("ECV contains array")
-                console.log(doc.data().ecv)
+                //console.log("ECV contains array")
+                //console.log(doc.data().ecv)
                 cellContentECV = fixECV(doc.data().ecv);
             } else {
-                console.log("ECV contains single entry")
+                //console.log("ECV contains single entry")
                 cellContentECV = Object.values(doc.data().ecv)[0]
             }
             var newText = document.createTextNode(cellContentECV);
@@ -105,7 +105,7 @@ function fixECV(ecvMap) {
     for (i = 0;i <= Object.keys(ecvMap).length;i++) {
         ecvArray.push(Object.values(ecvMap)[i])
     }
-    var uniqueECV = ecvArray.filter(onlyUnique);
+    var uniqueECV = ecvArray.filter(onlyUnique).sort();
     var fixedECV = uniqueECV.toString().replaceAll(",", "/")
     console.log(fixedECV)
     if(fixedECV.endsWith("/")) {
