@@ -106,6 +106,18 @@ function fixECV(ecvMap) {
         ecvArray.push(Object.values(ecvMap)[i])
     }
     var uniqueECV = filterUnique(ecvMap).sort();
+    // Check for C/E and E
+    for (i, val in enumerate(uniqueECV)) {
+        if (i = 0) {
+            break;
+        } else if (i == uniqueECV.length)
+            break;
+        else {
+            if (uniqueECV[i-1].includes(val))
+                uniqueECV.pop(i)
+        }
+    }
+
     console.log("Unique array: " + uniqueECV.toString())
     var fixedECV = uniqueECV.toString().replaceAll(",", "/")
     console.log("Fixed string:" + fixedECV)
