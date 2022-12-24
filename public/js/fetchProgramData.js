@@ -105,17 +105,19 @@ function fixECV(ecvMap) {
     for (i = 0;i <= Object.keys(ecvMap).length;i++) {
         ecvArray.push(Object.values(ecvMap)[i])
     }
-    var uniqueECV = ecvArray.filter(onlyUnique).sort();
+    var uniqueECV = filterUnique(ecvMap).sort();
     console.log("Unique array: " + uniqueECV.toString())
     var fixedECV = uniqueECV.toString().replaceAll(",", "/")
     console.log("Fixed string:" + fixedECV)
     if(fixedECV.endsWith("/")) {
         fixedECV = fixedECV.slice(0,-1)
     }
-
     return fixedECV
 }
 
 function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
+
+const filterUnique = arr => arr
+  .filter(str => new Set(str).size === str.length);

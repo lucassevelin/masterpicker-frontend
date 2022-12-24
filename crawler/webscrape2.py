@@ -1,11 +1,14 @@
 from bs4 import BeautifulSoup
 import requests
 import string
+import os
 
 import firebase_admin
 from firebase_admin import credentials, firestore
 import pandas as pd
 import numpy as np
+
+os.system('clear')
 
 def add_commas(s, words):
   # Split the string into a list of words
@@ -70,10 +73,7 @@ term = []
 listOfFields = []
 
 programIndex = url.find("program/")
-if(len(url) > programIndex+8+5):
-    programName = (url[programIndex+8:programIndex+8+5].upper() + "-" + url[-4:].upper())
-else:
-    programName = (url[programIndex+8:programIndex+8+5].upper())
+programName = (url[programIndex+8:programIndex+8+5].upper())
 print("Fetching: ", programName)
 
 specSelect = soup.find_all("select", class_="specializations-filter")
