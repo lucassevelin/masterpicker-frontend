@@ -58,7 +58,10 @@ function fetchProgramData(program, tableID, selectedCol) {
 
             var newCell = newRow.insertCell();
             var cellContentECV;
-            if (Object.keys(doc.data().ECV).length > 1) {
+            console.log(doc.data().ECV)
+            if (doc.data().ECV == null){
+                console.log("Error") 
+            } else if (Object.keys(doc.data().ECV).length > 1) {
                 console.log("ECV contains array")
                 console.log(doc.data().ECV)
                 cellContentECV = fixECV(doc.data().ECV);

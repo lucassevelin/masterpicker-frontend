@@ -41,7 +41,7 @@ courseLink = []
 credits = []
 level = []
 timetableModule = []
-ecv = [[]]
+ecv = []
 examForm = []
 multiPeriod = []
 fields = [[]]
@@ -50,9 +50,9 @@ listOfFields = []
 
 programIndex = url.find("program/")
 if(len(url) > programIndex+8+5):
-    programName = (url[programIndex+8:programIndex+8+5] + "-" + url[-4:])
+    programName = (url[programIndex+8:programIndex+8+5].upper() + "-" + url[-4:].upper())
 else:
-    programName = (url[programIndex+8:programIndex+8+5])
+    programName = (url[programIndex+8:programIndex+8+5].upper())
 print("Fetching: ", programName)
 
 specSelect = soup.find_all("select", class_="specializations-filter")
@@ -64,7 +64,7 @@ for sel in specSelect:
         specText = data.getText().strip()
         if specText != "" and specText != "All":
             specialisations.append(specText)
-print("Found " + str(len(specialisations)) + " specializations")
+#print("Found " + str(len(specialisations)) + " specializations")
 
 fieldSelect = soup.find_all("select", class_="field-of-study-filter")
 
@@ -75,7 +75,7 @@ for field in fieldSelect:
         fieldText = data.getText().strip()
         if fieldText != "" and fieldText != "All":
             listOfFields.append(fieldText)
-print("Found " + str(len(listOfFields)) + " fields of studies")
+#print("Found " + str(len(listOfFields)) + " fields of studies")
 
 numRows = soup.find_all("tr", class_="main-row")
 print("Iterating through " + str(len(numRows)) + " rows of data")
@@ -142,20 +142,23 @@ for link in courseLink: # Go through all courses individual webpage
     ecvTableRow = ecvTable.find_all("tr")
 
     row = 0
-    tempECV = []
+    tempECV = {}
     for ecvData in ecvTableRow:
         row += 1
         if(row>1):
-            if (ecvData.find('td').contents[0] == programName):
+            if (ecvData.find('td').contents[0].upper() == programName):
                 if (ecvData.find_all('td')[1].find('a').contents[0].find("(") != -1):
                     completeSpec = ecvData.find_all('td')[1].find('a').contents[0]
                     specIndex = completeSpec.find("(")
-                    tempECV.append({completeSpec[specIndex+1:-1]: ecvData.find_all('td')[7].find('span').contents[0].translate({ord(c): None for c in string.whitespace})})
+                    tempECV.update({completeSpec[specIndex+1:-1]: ecvData.find_all('td')[7].find('span').contents[0].translate({ord(c): None for c in string.whitespace})})
                     #print(ecvData.find_all('td')[7].find('span').contents[0].translate({ord(c): None for c in string.whitespace}) + " for " + completeSpec[specIndex+1:-1])
                 else:
-                    tempECV.append({"Other": ecvData.find_all('td')[7].find('span').contents[0].translate({ord(c): None for c in string.whitespace})})
+                    tempECV.update({"Other": ecvData.find_all('td')[7].find('span').contents[0].translate({ord(c): None for c in string.whitespace})})
                     #ecv.append(['*', ecvData.find_all('td')[7].find('span').contents[0].translate({ord(c): None for c in string.whitespace})])
                     #print(ecvData.find_all('td')[7].find('span').contents[0].translate({ord(c): None for c in string.whitespace}) + " for all specializations")
+    if not tempECV:
+        tempECV.update({"All": "-"})
+    print(tempECV)
     ecv.append(tempECV)
 
 print("Done adding exam form and ecv data")
