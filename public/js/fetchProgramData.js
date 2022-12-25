@@ -108,9 +108,9 @@ function fixECV(ecvMap) {
     console.log(ecvMap)
     console.log(ecvArray.sort())
     var uniqueECV = ecvArray.filter(onlyUnique).sort();
+    
     // Check for C/E and E
     for (i=0; i<=uniqueECV.length;i++) {
-        console.log("On E iteration: " + i.toString())
         if (i > 0) {
             console.log("Previous E index: " + uniqueECV[i-1])
             if (uniqueECV[i-1].includes(uniqueECV[i]))
