@@ -95,36 +95,52 @@ function clearTable(tableID) {
     var Table = document.getElementById(tableID);
     //console.log(Table)
     Table.innerHTML = "";
-    Table.innerHTML = '<tr><th onclick="sortTable(0)">Course name</th><th onclick="sortTable(1)">Course code</th><th onclick="sortTable(2)">Period</th><th onclick="sortTable(3)">Timetable module</th><th onclick="sortTable(4)">Exam?</th><th onclick="sortTable(5)">Credits</th><th onclick="sortTable(6)">E/C/V</th><th onclick="sortTable(7)">Main field of study</th><th onclick="sortTable(8)">Level</th><th onclick="sortTable(9)">Selected</th></tr>';
+    Table.innerHTML = '<tr><th onclick="sortTable(0)">Course name</th><th onclick="sortTable(1)">Course code</th><th onclick="sortTable(2)">Period</th><th onclick="sortTable(3)">Timetable module</th><th onclick="sortTable(4)">Exam?</th><th onclick="sortTable(5)">Credits</th><th onclick="sortTable(6)">C/E/V</th><th onclick="sortTable(7)">Main field of study</th><th onclick="sortTable(8)">Level</th><th onclick="sortTable(9)">Selected</th></tr>';
     document.getElementById(tableID).classList.add("hidden")
 }
 
 function fixECV(ecvMap) {
-    ecvKey = Array.from(ecvMap)
     ecvArray = []
     for (i = 0;i <= Object.keys(ecvMap).length;i++) {
         ecvArray.push(Object.values(ecvMap)[i])
     }
-    var uniqueECV = filterUnique(ecvMap).sort();
+    ecvArray.pop(ecvArray.length)
+    console.log(ecvMap)
+    console.log(ecvArray.sort())
+    var uniqueECV = ecvArray.filter(onlyUnique).sort();
     // Check for C/E and E
-    for (i, val in enumerate(uniqueECV)) {
-        if (i = 0) {
-            break;
-        } else {
-            if (uniqueECV[i-1].includes(val))
-                console.log("Found extra E, removing")
-                uniqueECV.pop(i)
+    for (i=0; i<=uniqueECV.length;i++) {
+        console.log("On E iteration: " + i.toString())
+        if (i > 0) {
+            console.log("Previous E index: " + uniqueECV[i-1])
+            if (uniqueECV[i-1].includes(uniqueECV[i]))
+                console.log("Found extra E, removing " + uniqueECV[i].toString())
+                uniqueECV.splice(i+1, 1)
+                console.log(uniqueECV)
+        }
+    }
+    console.log("Halfway done with array: " + uniqueECV.toString())
+    // Check for C/E and C
+    for (i=0; i<uniqueECV.length;i++) {
+        console.log("On C iteration: " + i.toString())
+        if(i<uniqueECV.length-1){
+            console.log("Next C index: " + uniqueECV[i+1])
+            if (uniqueECV[i+1].includes(uniqueECV[i]))
+                console.log("Found extra C, removing " + uniqueECV[i].toString())
+                uniqueECV.splice(i, 1)
+                console.log(uniqueECV)
         }
     }
 
     console.log("Unique array: " + uniqueECV.toString())
     var fixedECV = uniqueECV.toString().replaceAll(",", "/")
-    console.log("Fixed string:" + fixedECV)
+    console.log("Fixed string: " + fixedECV)
     if(fixedECV.endsWith("/")) {
         fixedECV = fixedECV.slice(0,-1)
     }
     return fixedECV
 }
 
-const filterUnique = arr => arr
-  .filter(str => new Set(str).size === str.length);
+function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+  }
