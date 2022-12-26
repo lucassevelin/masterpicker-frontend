@@ -35,14 +35,14 @@
         <h2>Welcome to</h2>
         <h1>LiU Masterpicker</h1>
         <p>This is a work in progress of an improved master picker for som LiU masters.</p>
-        <label for="programSelect">Select a program and starting year</label>
+        <label for="programSelect">Select a program and starting year: </label>
         <select name="programSelect" id="programSelect" class="headerSelect">
           <option>Please select program</option>
         </select>
         <br>
-        <label for="specSelect" class="hidden">Select a specialization</label>
+        <label id="specSelectLabel" for="specSelect" class="hidden">Specializations: </label>
         <select name="specSelect" id="specSelect" class="headerSelect hidden">
-          <option>Please select specialization</option>
+          <option>All</option>
         </select>
       </div>
       <div class="content-grid">
@@ -136,7 +136,11 @@
       });
 
       document.getElementById('programSelect').addEventListener('change',
-      function(){fetchProgramData(document.getElementById('programSelect').value, "programDataTable", "programmes");})
+      function(){
+        fetchProgramData(document.getElementById('programSelect').value, "programDataTable", "programmes");
+        document.getElementById('specSelect').classList.remove('hidden')
+        document.getElementById('specSelectLabel').classList.remove('hidden')
+      })
 
       //window.onload = populateSelect('programmes', 'programSelect');
     </script>

@@ -1,6 +1,6 @@
 function populateSelect(collection, selectId){
     var db = firebase.firestore();
-    var data = db.collection(collection).get()
+    db.collection(collection).get()
     .then(snapshot => {
         snapshot.forEach(doc => {
         // Now that you have the data, create an option element for each item

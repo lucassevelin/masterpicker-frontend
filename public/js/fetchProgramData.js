@@ -6,13 +6,10 @@ function fetchProgramData(program, tableID, selectedCol) {
     clearTable(tableID);
     var tableToFill = document.getElementById(tableID).getElementsByTagName('tbody')[0]
 
+    populateSpecs(selectedCol, program, 'specSelect', db)
+
     programCol.get().then(snapshot => {
         snapshot.docs.forEach((doc) => {
-            //console.log(doc.data())
-            //console.log("Data is of type: " + doc.data().constructor)
-            //console.log("Data is still of type: " + dataToPush.constructor)
-            //console.log(doc.data())
-            
             // Insert a row at the end of table
             var newRow = tableToFill.insertRow();
 
@@ -143,4 +140,19 @@ function fixECV(ecvMap) {
 
 function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
+  }
+
+function populateSpecs(collection, program, selectId, db){
+    console.log("Fetching from " + collection + "/" + program)
+
+    db.collection(collection).doc(program).get()
+    .then(snapshot => {
+        snapshot.data().specializations.forEach(spec => {
+            var option = document.createElement('option');
+            option.value = spec;
+            option.text = spec;
+
+            document.getElementById(selectId).appendChild(option)
+        });
+    });
   }
