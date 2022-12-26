@@ -53,7 +53,7 @@ function fetchProgramData(program, tableID, selectedCol, spec=null) {
 
         console.log("Fetch complete")
         console.log(programData)
-        programDataFiltered = onlyUniqueNested(programData, 2)
+        programDataFiltered = onlyUniqueNested(programData, 0)
         populateTable(tableID, programDataFiltered)
     })
     document.getElementById(tableID).classList.remove("hidden")

@@ -52,6 +52,7 @@ body {
     font-family: Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 0;
+    opacity: 1;
 }
 
 #load {
@@ -66,6 +67,10 @@ body {
     font-size: 13px;
 }
 
+#programDataTable {
+    width: 100%;
+}
+
 #programDataTable tr td {
     max-width: 15%;
 }
@@ -77,6 +82,23 @@ select {
     font-family: inherit;
     font-size: 0.9em;
     cursor: pointer;
+}
+
+
+.TTM-1 {
+    background-color: rgba(202, 231, 215, 0.5);
+}
+
+.TTM-2 {
+    background-color: rgba(202, 218, 231, 0.5);
+}
+
+.TTM-3 {
+    background-color: rgba(231, 202, 218, 0.5);
+}
+
+.TTM-4 {
+    background-color: rgba(231, 215, 202, 0.5);
 }
 
 @media (max-width: 600px) {

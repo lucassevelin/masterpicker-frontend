@@ -32,6 +32,8 @@ function populateTable (tableID, dataArray) {
         var ttmText = document.createTextNode(prog[4]);
         ttmCell.appendChild(ttmText);
 
+        newRow.classList.add("TTM-" + prog[4]) // Add ttm numbering as class, for coloring
+
         var examCell = newRow.insertCell();
         var examText = document.createTextNode(prog[5]);
         examCell.appendChild(examText);

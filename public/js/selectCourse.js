@@ -11,6 +11,8 @@ function selectCourse(checkbox) {
         factor = -1;
     }
 
+    toggleHighlight(checkbox)
+
     var row = checkbox.parentElement.parentElement;
     dataCells = row.cells;
 
@@ -33,4 +35,17 @@ function selectCourse(checkbox) {
     }
 
     // TODO: Fix profile HP
+}
+
+function toggleHighlight(checkbox) {
+    console.log("Running coloring function")
+    var element = checkbox.parentNode.parentNode
+    console.log(element)
+    var currColor = element.style.fontSize;
+    console.log(currColor)
+    var currAlpha = currColor.match(/[\d.]+/)[0];
+
+    var newAlpha;
+    currAlpha == 0.5 ? 1 : 0.5
+    element.style.backGroundColor = currColor.replace(currAlpha, newAlpha);
 }
