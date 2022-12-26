@@ -1,4 +1,4 @@
-function fetchProgramData(program, tableID, selectedCol) {
+function fetchProgramData(program, tableID, selectedCol, spec=null) {
     var db = firebase.firestore();
 
     var programCol = db.collection(selectedCol).doc(program).collection("courses")
@@ -8,7 +8,20 @@ function fetchProgramData(program, tableID, selectedCol) {
 
     populateSpecs(selectedCol, program, 'specSelect', db)
 
-    programCol.get().then(snapshot => {
+    var filter
+    if (spec == null) {
+        filter = false
+    } else {
+        filter = true;
+    }
+    console.log(filter)
+
+    programCol
+    .orderBy("term", "asc")
+    .orderBy("timetableModule", "asc")
+    .orderBy("name")
+    .get()
+    .then(snapshot => {
         snapshot.docs.forEach((doc) => {
             // Insert a row at the end of table
             var newRow = tableToFill.insertRow();
