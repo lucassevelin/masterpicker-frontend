@@ -25,8 +25,12 @@ function populateTable (tableID, dataArray) {
         codeCell.appendChild(codeText);
 
         var termCell = newRow.insertCell();
-        fixedTermIndex = prog[3].indexOf("-")
-        fixedTermText = prog[3].slice(fixedTermIndex+1, prog[3].length) + " " + prog[3].slice(0, fixedTermIndex)
+        if (prog[3].length == 1) {
+            fixedTermText = "N/A"
+        } else {
+            fixedTermIndex = prog[3].indexOf("-")
+            fixedTermText = prog[3].slice(fixedTermIndex+1, prog[3].length) + " " + prog[3].slice(0, fixedTermIndex)
+        }
         var termText = document.createTextNode(fixedTermText.toUpperCase());
         termCell.appendChild(termText);
 
