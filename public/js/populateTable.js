@@ -25,7 +25,9 @@ function populateTable (tableID, dataArray) {
         codeCell.appendChild(codeText);
 
         var termCell = newRow.insertCell();
-        var termText = document.createTextNode(prog[3]);
+        fixedTermIndex = prog[3].indexOf("-")
+        fixedTermText = prog[3].slice(fixedTermIndex+1, prog[3].length) + " " + prog[3].slice(0, fixedTermIndex)
+        var termText = document.createTextNode(fixedTermText.toUpperCase());
         termCell.appendChild(termText);
 
         var ttmCell = newRow.insertCell();
@@ -35,8 +37,13 @@ function populateTable (tableID, dataArray) {
         newRow.classList.add("TTM-" + prog[4]) // Add ttm numbering as class, for coloring
 
         var examCell = newRow.insertCell();
-        var examText = document.createTextNode(prog[5]);
-        examCell.appendChild(examText);
+        if (prog[5]) {
+            examCell.innerHTML = '<i class="fa-solid fa-check"></i>';
+        } else if (prog[5] == false) {
+            examCell.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+        } else {
+            examCell.innerHTML = '<i class="fa-solid fa-question"></i>';
+        }
 
         var creditsCell = newRow.insertCell();
         var creditsText = document.createTextNode(prog[6]);
