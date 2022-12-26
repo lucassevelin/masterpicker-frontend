@@ -4,7 +4,6 @@ function fetchProgramData(program, tableID, selectedCol, spec=null) {
     var programCol = db.collection(selectedCol).doc(program).collection("courses")
 
     clearTable(tableID);
-    var tableToFill = document.getElementById(tableID).getElementsByTagName('tbody')[0]
 
     populateSpecs(selectedCol, program, 'specSelect', db)
 
@@ -14,99 +13,50 @@ function fetchProgramData(program, tableID, selectedCol, spec=null) {
     } else {
         filter = true;
     }
-    console.log(filter)
+    //console.log(filter)
+    var programData = [];
+    var dataEntry = [];
+    console.log(programData)
 
     programCol
     .orderBy("term", "asc")
     .orderBy("timetableModule", "asc")
-    .orderBy("name")
+    .orderBy("name", "asc")
     .get()
     .then(snapshot => {
         snapshot.docs.forEach((doc) => {
-            // Insert a row at the end of table
-            var newRow = tableToFill.insertRow();
-
-            // Insert a cell at the end of the row
-            var newCell = newRow.insertCell();
-
-            // Append a text node to the cell
-            //var newText = document.createTextNode(doc.data().name);
-            if (doc.data().link) {
-                var newText = document.createElement("a")
-                newText.setAttribute("href", doc.data().link)
-                newText.setAttribute("target", "_blank")
-                newText.innerText = doc.data().name
-            } else {
-                var newText = document.createTextNode(doc.data().name)
-            }
-            newCell.appendChild(newText);
-
-            var newCell = newRow.insertCell();
-            var newText = document.createTextNode(doc.data().code);
-            newCell.appendChild(newText);
-
-            var newCell = newRow.insertCell();
-            var newText = document.createTextNode(doc.data().term);
-            newCell.appendChild(newText);
-
-            var newCell = newRow.insertCell();
-            var newText = document.createTextNode(doc.data().timetableModule);
-            newCell.appendChild(newText);
-
-            var newCell = newRow.insertCell();
-            var newText = document.createTextNode(doc.data().exam);
-            newCell.appendChild(newText);
-
-            var newCell = newRow.insertCell();
-            //console.log(doc.data().multiplePeriods)
-            /*if (doc.data().multiplePeriods) {
-                var newText = document.createTextNode(doc.data().credits);
-            } else {
-                var newText = document.createTextNode(String(doc.data().credits + "*"));
-            }*/
-            newCell.appendChild(document.createTextNode(doc.data().credits));
-
-            var newCell = newRow.insertCell();
-            var cellContentECV;
-            //console.log("Raw data: " + doc.data().ecv)
+            dataEntry = [];
+            console.log(doc.data())
             if (doc.data().ecv == null){
-                console.log("Error when loading ECV data") 
+                console.log("Error when loading ECV data")
+                cellContentECV = "-"
             } else if (Object.keys(doc.data().ecv).length > 1) {
-                //console.log("ECV contains array")
-                //console.log(doc.data().ecv)
                 cellContentECV = fixECV(doc.data().ecv);
             } else {
-                //console.log("ECV contains single entry")
                 cellContentECV = Object.values(doc.data().ecv)[0]
             }
-            var newText = document.createTextNode(cellContentECV);
-            newCell.appendChild(newText);
 
-            var newCell = newRow.insertCell();
-            var newText = document.createTextNode(doc.data().fields);
-            newCell.appendChild(newText);
-
-            var newCell = newRow.insertCell();
-            var newText = document.createTextNode(doc.data().level);
-            newCell.appendChild(newText);
-
-            var newCell = newRow.insertCell();
-            var newCheckbox = document.createElement("input");
-            newCheckbox.type = "checkbox";
-            newCheckbox.setAttribute("onClick", "selectCourse(this)");
-            newCell.appendChild(newCheckbox);
+            dataEntry = [doc.data().name, 
+                doc.data().link ? doc.data().link : "#",
+                doc.data().code,
+                doc.data().term,
+                doc.data().timetableModule,
+                doc.data().exam,
+                doc.data().credits,
+                cellContentECV,
+                doc.data().fields,
+                doc.data().level];
+            
+            programData.push(dataEntry)
         })
-    })
-    console.log("Done!")
-    document.getElementById(tableID).classList.remove("hidden")
-}
 
-function clearTable(tableID) {
-    var Table = document.getElementById(tableID);
-    //console.log(Table)
-    Table.innerHTML = "";
-    Table.innerHTML = '<tr><th onclick="sortTable(0)">Course name</th><th onclick="sortTable(1)">Course code</th><th onclick="sortTable(2)">Period</th><th onclick="sortTable(3)">Timetable module</th><th onclick="sortTable(4)">Exam?</th><th onclick="sortTable(5)">Credits</th><th onclick="sortTable(6)">C/E/V</th><th onclick="sortTable(7)">Main field of study</th><th onclick="sortTable(8)">Level</th><th onclick="sortTable(9)">Selected</th></tr>';
-    document.getElementById(tableID).classList.add("hidden")
+        console.log("Fetch complete")
+        console.log(programData)
+        //const programDataFiltered = onlyUniqueNested(programData, 2)
+        const programDataFiltered = programData;
+        populateTable(tableID, programDataFiltered)
+    })
+    document.getElementById(tableID).classList.remove("hidden")
 }
 
 function fixECV(ecvMap) {
@@ -115,36 +65,23 @@ function fixECV(ecvMap) {
         ecvArray.push(Object.values(ecvMap)[i])
     }
     ecvArray.pop(ecvArray.length)
-    console.log(ecvMap)
-    console.log(ecvArray.sort())
     var uniqueECV = ecvArray.filter(onlyUnique).sort();
     
     // Check for C/E and E
     for (i=0; i<=uniqueECV.length;i++) {
         if (i > 0) {
-            console.log("Previous E index: " + uniqueECV[i-1])
             if (uniqueECV[i-1].includes(uniqueECV[i]))
-                console.log("Found extra E, removing " + uniqueECV[i].toString())
                 uniqueECV.splice(i+1, 1)
-                console.log(uniqueECV)
         }
     }
-    console.log("Halfway done with array: " + uniqueECV.toString())
     // Check for C/E and C
     for (i=0; i<uniqueECV.length;i++) {
-        console.log("On C iteration: " + i.toString())
         if(i<uniqueECV.length-1){
-            console.log("Next C index: " + uniqueECV[i+1])
             if (uniqueECV[i+1].includes(uniqueECV[i]))
-                console.log("Found extra C, removing " + uniqueECV[i].toString())
                 uniqueECV.splice(i, 1)
-                console.log(uniqueECV)
         }
     }
-
-    console.log("Unique array: " + uniqueECV.toString())
     var fixedECV = uniqueECV.toString().replaceAll(",", "/")
-    console.log("Fixed string: " + fixedECV)
     if(fixedECV.endsWith("/")) {
         fixedECV = fixedECV.slice(0,-1)
     }
@@ -153,6 +90,19 @@ function fixECV(ecvMap) {
 
 function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
+  }
+
+function onlyUniqueNested(arr, index) {
+    const seen = new Set();
+    return arr.filter(item => {
+      const value = item[index];
+      if (seen.has(value)) {
+        return false;
+      } else {
+        seen.add(value);
+        return true;
+      }
+    });
   }
 
 function populateSpecs(collection, program, selectId, db){
