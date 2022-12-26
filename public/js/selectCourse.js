@@ -43,7 +43,11 @@ function toggleHighlight(checkbox) {
     console.log(element)
     var currColor = element.style.fontSize;
     console.log(currColor)
-    var currAlpha = currColor.match(/[\d.]+/)[0];
+    if (currColor == null || currColor == "") {
+        console.log("Unable to get color")
+    } else {
+        var currAlpha = currColor.match(/[\d.]+/)[0];
+    }
 
     var newAlpha;
     currAlpha == 0.5 ? 1 : 0.5
