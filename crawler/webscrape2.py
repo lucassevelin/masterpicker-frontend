@@ -121,9 +121,9 @@ for row in numRows:
             completeLink = "https://studieinfo.liu.se" + link['href']
             courseLink.append(completeLink)
             if "ht" in completeLink[-7:] or "vt" in completeLink[-7:]: 
-                term.append(completeLink[-7:])
+                term.append(completeLink[-4:] + " " + completeLink[-7:-5].upper())
             else:
-                term.append("-")
+                term.append("N/A")
         elif dataCounter == 3: # Get course credits
             credits.append(data.getText())
         elif dataCounter == 4: # Get course level
@@ -219,7 +219,7 @@ app = firebase_admin.initialize_app(cred)
 
 store = firestore.client()
 
-collection_name = programName + "-" +term[0]
+collection_name = programName + " (" +term[0] + ")"
 
 batch = store.batch()
 programData_ref = store.collection(colPath).document(collection_name)

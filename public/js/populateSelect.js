@@ -7,7 +7,7 @@ function populateSelect(collection, selectId){
         var option = document.createElement('option');
         option.value = doc.id;  // Set the value of the option to the document ID
 
-        styledText = doc.id.slice(0,-8) + " (" + doc.id.slice(-7,-5).toUpperCase() + " " + doc.id.slice(-4) + ")"
+        styledText = doc.id;
         option.text = styledText;  // Set the text of the option to the name field of the document
         
         // Append the option to the select element

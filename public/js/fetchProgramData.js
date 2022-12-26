@@ -119,3 +119,7 @@ function populateSpecs(collection, program, selectId, db){
         });
     });
   }
+
+  function sort2DArray(array, index) {
+    array.sort((a, b) => a[index] - b[index]);
+  }
