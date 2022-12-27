@@ -19,10 +19,13 @@ function selectCourse(checkbox) {
     // Update total HP
     var newTotalHP;
     var formattedHP;
+    var multiPeriodCourse = false;
     if (dataCells[5].textContent.toString().length > 1){
-        formattedHP = parseInt(dataCells[5].textContent.slice(0, -1));
+        formattedHP = parseInt(dataCells[5].textContent.slice(0, -1))/2;
+        multiPeriodCourse = true;
     } else {
         formattedHP = parseInt(dataCells[5].textContent);
+        multiPeriodCourse = false;
     }
     newTotalHP = totalHP + factor*formattedHP;
     document.getElementById("examTotal").innerHTML = newTotalHP;

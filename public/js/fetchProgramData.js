@@ -53,11 +53,12 @@ function fetchProgramData(program, tableID, selectedCol, spec=null) {
 
         console.log("Fetch complete")
         console.log(programData)
-        //programDataFiltered = onlyUniqueNested(programData, [2, 3])
-        programDataFiltered = programData;
+        programDataFiltered = onlyUniqueNested(programData, [2, 3], [4, 6])
+        //programDataFiltered = programData;
         populateTable(tableID, programDataFiltered)
     })
     document.getElementById(tableID).classList.remove("hidden")
+    return programDataFiltered;
 }
 
 function fixECV(ecvMap) {
@@ -93,12 +94,15 @@ function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
 
-function onlyUniqueNested(array, indices) {
+function onlyUniqueNested(array, indices, exclude = []) {
     const seen = new Set();
 
     return array.filter((row) => {
-        const key = indices.map((i) => row[i]).join("|");
-        if (seen.has(key) && !row[6].includes("*")) {
+        const key = indices
+        .filter((i) => !exclude.includes(i))
+        .map((i) => row[i])
+        .join("|");
+        if (seen.has(key)) {
         return false;
         } else {
         seen.add(key);
