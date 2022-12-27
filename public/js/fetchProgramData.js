@@ -53,7 +53,7 @@ function fetchProgramData(program, tableID, selectedCol, spec=null) {
 
         console.log("Fetch complete")
         console.log(programData)
-        programDataFiltered = onlyUniqueNested(programData, 0)
+        programDataFiltered = onlyUniqueNested(programData, [2, 3])
         populateTable(tableID, programDataFiltered)
     })
     document.getElementById(tableID).classList.remove("hidden")
@@ -92,16 +92,17 @@ function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
 
-function onlyUniqueNested(arr, index) {
+function onlyUniqueNested(array, indices) {
     const seen = new Set();
-    return arr.filter(item => {
-      const value = item[index];
-      if (seen.has(value)) {
+
+    return array.filter((row) => {
+        const key = indices.map((i) => row[i]).join("|");
+        if (seen.has(key)) {
         return false;
-      } else {
-        seen.add(value);
+        } else {
+        seen.add(key);
         return true;
-      }
+        }
     });
   }
 
