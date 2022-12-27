@@ -97,7 +97,7 @@ function onlyUniqueNested(array, indices) {
 
     return array.filter((row) => {
         const key = indices.map((i) => row[i]).join("|");
-        if (seen.has(key)) {
+        if (seen.has(key) && !row[6].includes("*")) {
         return false;
         } else {
         seen.add(key);
