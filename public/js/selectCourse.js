@@ -46,6 +46,7 @@ function selectCourse(checkbox) {
         document.getElementById("examAdvancedProfile").innerHTML = newAdvHPProfile;
     }
     
+    // TODO: Count profile hp
 
 }
 
