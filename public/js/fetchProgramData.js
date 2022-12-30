@@ -112,10 +112,20 @@ function onlyUniqueNested(array, indices, exclude = []) {
   }
 
 function populateSpecs(collection, program, selectId, db){
-    console.log("Fetching from " + collection + "/" + program)
+    //console.log("Fetching from " + collection + "/" + program)
 
     db.collection(collection).doc(program).get()
     .then(snapshot => {
+        // First get fields
+        snapshot.data().fields.forEach(field => {
+            var option = document.createElement('option');
+            option.value = field;
+            option.text = field;
+
+            document.getElementById(selectId).appendChild(option)
+        });
+
+        // Then get specializations
         snapshot.data().specializations.forEach(spec => {
             var option = document.createElement('option');
             option.value = spec;

@@ -48,6 +48,11 @@
         <select name="specSelect" id="specSelect" class="headerSelect hidden">
           <option>All</option>
         </select>
+        <br>
+        <label id="fieldSelectLabel" for="fieldSelect" class="hidden">Main field of study: </label>
+        <select name="fieldSelect" id="fieldSelect" class="headerSelect hidden">
+          <option>None</option>
+        </select>
       </div>
       <div class="content-grid">
         <table id="programDataTable" class="hidden">
@@ -144,6 +149,8 @@
         fetchProgramData(document.getElementById('programSelect').value, "programDataTable", "programmes");
         document.getElementById('specSelect').classList.remove('hidden')
         document.getElementById('specSelectLabel').classList.remove('hidden')
+        document.getElementById('fieldSelect').classList.remove('hidden')
+        document.getElementById('fieldSelectLabel').classList.remove('hidden')
       })
 
       //window.onload = populateSelect('programmes', 'programSelect');
