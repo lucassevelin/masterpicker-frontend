@@ -5,7 +5,7 @@ function fetchProgramData(program, tableID, selectedCol, spec=null) {
 
     clearTable(tableID);
 
-    populateSpecs(selectedCol, program, 'specSelect', db)
+    populateSpecs(selectedCol, program, 'fieldSelect', 'specSelect', db)
 
     var filter
     if (spec == null) {
