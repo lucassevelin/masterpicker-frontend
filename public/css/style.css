@@ -29,6 +29,7 @@ body{
         'header header header header header header'
         'main main main main right right'
         'footer footer footer footer footer footer';
+    grid-template-columns: auto auto auto auto 175px 175px;
     gap: 10px;
     background-color: #2196F3;
     padding: 10px;
@@ -62,10 +63,6 @@ body {
     color: rgba(0, 0, 0, 0.4);
     text-align: center;
     font-size: 13px;
-}
-
-#programDataTable {
-    width: 100%;
 }
 
 #programDataTable tr td {
@@ -112,14 +109,4 @@ th, tr, td {
 
 @media (max-width: 600px) {
 
-    body,
-    #message {
-        margin-top: 0;
-        background: white;
-        box-shadow: none;
-    }
-
-    body {
-        border-top: 16px solid #ffa100;
-    }
 }
