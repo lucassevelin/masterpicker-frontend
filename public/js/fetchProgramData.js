@@ -111,7 +111,7 @@ function onlyUniqueNested(array, indices, exclude = []) {
     });
   }
 
-function populateSpecs(collection, program, selectId, db){
+function populateSpecs(collection, program, fieldSelectID, specSelectID, db){
     //console.log("Fetching from " + collection + "/" + program)
 
     db.collection(collection).doc(program).get()
@@ -123,7 +123,7 @@ function populateSpecs(collection, program, selectId, db){
             fieldOption.value = field;
             fieldOption.text = field;
 
-            document.getElementById(selectId).appendChild(fieldOption)
+            document.getElementById(fieldSelectID).appendChild(fieldOption)
         });
         console.log("Done fetching fields")
 
@@ -133,7 +133,7 @@ function populateSpecs(collection, program, selectId, db){
             option.value = spec;
             option.text = spec;
 
-            document.getElementById(selectId).appendChild(option)
+            document.getElementById(specSelectID).appendChild(option)
         });
         console.log("Done fetching specializations")
     });
