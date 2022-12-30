@@ -116,6 +116,7 @@ function populateSpecs(collection, program, selectId, db){
 
     db.collection(collection).doc(program).get()
     .then(snapshot => {
+        console.log(snapshot.data())
         // First get fields
         snapshot.data().fields.forEach(field => {
             var fieldOption = document.createElement('option');
