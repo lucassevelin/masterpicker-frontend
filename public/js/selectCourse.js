@@ -37,8 +37,8 @@ function selectCourse(checkbox) {
         document.getElementById("examAdvanced").innerHTML = newAdvHP;
     }
 
-    const selectedSpec = document.getElementById('fieldSelect').value;
-    const selectedField = document.getElementById('specSelect').value;
+    const selectedSpec = document.getElementById('specSelect').value;
+    const selectedField = document.getElementById('fieldSelect').value;
 
     console.log("Selected " + selectedField + " as field of study.")
 
