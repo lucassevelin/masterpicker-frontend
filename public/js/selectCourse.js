@@ -69,3 +69,16 @@ function toggleHighlight(checkbox) {
     currAlpha == 0.5 ? 1 : 0.5
     element.style.backGroundColor = currColor.replace(currAlpha, newAlpha);
 }
+
+function updateCredits(tableID) {
+    var table = document.getElementById(tableID);
+        var checkedArray = [];
+
+        for (var i = 0; i <= table.rows.length; i++) {
+          var checkbox = table.rows[i].cells[9].querySelector('input[type="checkbox"]');
+          if(checkbox.checked) {
+            checkedArray.push(checkbox);
+          }
+        }
+    checkedArray.forEach(selectCourse)
+}

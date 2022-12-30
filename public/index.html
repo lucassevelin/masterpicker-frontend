@@ -88,7 +88,7 @@
             <td><span id="examAdvancedProfile">0</span>/30 hp</td>
           </tr>
           <tr>
-            <td>Profile courses</td>
+            <td>Specialization courses</td>
             <td><span id="examProfile">0</span>/60 hp</td>
           </tr>
         </table>
@@ -131,14 +131,18 @@
         }
       });
 
+      var dataArray = [];
       document.getElementById('programSelect').addEventListener('change',
       function(){
-        fetchProgramData(document.getElementById('programSelect').value, "programDataTable", "programmes");
+        dataArray = fetchProgramData(document.getElementById('programSelect').value, "programDataTable", "programmes");
         document.getElementById('specSelect').classList.remove('hidden')
         document.getElementById('specSelectLabel').classList.remove('hidden')
         document.getElementById('fieldSelect').classList.remove('hidden')
         document.getElementById('fieldSelectLabel').classList.remove('hidden')
       })
+
+      // Recount points when field is changed
+      document.getElementById('fieldSelect').addEventListener('change', updateCredits('programDataTable'))
 
       //window.onload = populateSelect('programmes', 'programSelect');
     </script>
