@@ -74,3 +74,23 @@ function clearTable(tableID) {
     Table.innerHTML = '<tr><th onclick="sortTable(0)">Course name</th><th onclick="sortTable(1)">Course code</th><th onclick="sortTable(2)">Period</th><th onclick="sortTable(3)">Timetable module</th><th onclick="sortTable(4)">Exam?</th><th onclick="sortTable(5)">Credits</th><th onclick="sortTable(6)">C/E/V</th><th onclick="sortTable(7)">Main field of study</th><th onclick="sortTable(8)">Level</th><th onclick="sortTable(9)">Selected</th></tr>';
     document.getElementById(tableID).classList.add("hidden")
 }
+
+function stickyTable(tableID) {
+    var table = document.getElementById(tableID);
+    var tableTop = table.getBoundingClientRect().top;
+    var tableBottom = table.getBoundingClientRect().bottom;
+
+    if (tableTop < 0 && tableBottom > 0) {
+      // The table is partially visible, so fix it to the top of the page
+      table.style.top = '0';
+      table.style.position = 'fixed';
+    } else if (tableTop >= 0) {
+      // The table is fully visible, so reset its position
+      table.style.position = 'absolute';
+      table.style.top = 'auto';
+    } else {
+      // The table is not visible, so leave it in its original position
+      table.style.position = 'absolute';
+      table.style.top = 'auto';
+    }
+}

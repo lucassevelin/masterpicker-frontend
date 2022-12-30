@@ -105,6 +105,7 @@
     <script>
       document.getElementById("copyrightYear").innerHTML =  new Date().getFullYear();
 
+      window.addEventListener('scroll', stickyTable('checkExamTerms'));
 
       document.addEventListener('DOMContentLoaded', function() {
         const loadEl = document.querySelector('#load');
