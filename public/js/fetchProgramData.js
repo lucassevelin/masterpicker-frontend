@@ -17,7 +17,7 @@ function fetchProgramData(program, tableID, selectedCol, spec=null) {
     var programData = [];
     var dataEntry = [];
     var programDataFiltered = [];
-    console.log(programData)
+    //console.log(programData)
 
     programCol
     .orderBy("term", "asc")
@@ -27,7 +27,7 @@ function fetchProgramData(program, tableID, selectedCol, spec=null) {
     .then(snapshot => {
         snapshot.docs.forEach((doc) => {
             dataEntry = [];
-            console.log(doc.data())
+            //console.log(doc.data())
             if (doc.data().ecv == null){
                 console.log("Error when loading ECV data")
                 cellContentECV = "-"
@@ -52,7 +52,7 @@ function fetchProgramData(program, tableID, selectedCol, spec=null) {
         })
 
         console.log("Fetch complete")
-        console.log(programData)
+        //console.log(programData)
         //programDataFiltered = onlyUniqueNested(programData, [2, 3], [4, 6])
         programDataFiltered = programData;
         populateTable(tableID, programDataFiltered)
@@ -118,12 +118,13 @@ function populateSpecs(collection, program, selectId, db){
     .then(snapshot => {
         // First get fields
         snapshot.data().fields.forEach(field => {
-            var option = document.createElement('option');
+            var fieldOption = document.createElement('option');
             option.value = field;
             option.text = field;
 
-            document.getElementById(selectId).appendChild(option)
+            document.getElementById(selectId).appendChild(fieldOption)
         });
+        console.log("Done fetching fields")
 
         // Then get specializations
         snapshot.data().specializations.forEach(spec => {
@@ -133,6 +134,7 @@ function populateSpecs(collection, program, selectId, db){
 
             document.getElementById(selectId).appendChild(option)
         });
+        console.log("Done fetching specializations")
     });
   }
 
