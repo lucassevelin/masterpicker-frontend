@@ -13,8 +13,8 @@ function selectCourse(checkbox) {
 
     toggleHighlight(checkbox)
 
-    var row = checkbox.parentElement.parentElement;
-    dataCells = row.cells;
+    const row = checkbox.parentElement.parentElement;
+    var dataCells = row.cells;
 
     // Update total HP
     var newTotalHP;
@@ -37,7 +37,16 @@ function selectCourse(checkbox) {
         document.getElementById("examAdvanced").innerHTML = newAdvHP;
     }
 
-    // TODO: Fix profile HP
+    const selectedSpec = document.getElementById('fieldSelect').value;
+    const selectedField = document.getElementById('specSelect').value;
+
+    var newAdvHPProfile;
+    if (dataCells[8].textContent.includes("A") && dataCells[7].includes(selectedField)) {
+        newAdvHPProfile = advHPProfile + factor*formattedHP;
+        document.getElementById("examAdvancedProfile").innerHTML = newAdvHPProfile;
+    }
+    
+
 }
 
 function toggleHighlight(checkbox) {
