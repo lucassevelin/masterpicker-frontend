@@ -112,6 +112,8 @@ function onlyUniqueNested(array, indices, exclude = []) {
   }
 
 function populateSpecs(collection, program, fieldSelectID, specSelectID, db){
+    clearSelect(fieldSelectID);
+    clearSelect(specSelectID);
     //console.log("Fetching from " + collection + "/" + program)
 
     db.collection(collection).doc(program).get()

@@ -1,4 +1,5 @@
 function populateSelect(collection, selectId){
+    clearSelect(selectId);
     var db = firebase.firestore();
     db.collection(collection).get()
     .then(snapshot => {
