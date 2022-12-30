@@ -41,7 +41,7 @@ function selectCourse(checkbox) {
     const selectedField = document.getElementById('specSelect').value;
 
     var newAdvHPProfile;
-    if (dataCells[8].textContent.includes("A") && dataCells[7].includes(selectedField)) {
+    if (dataCells[8].textContent.includes("A") && dataCells[7].textContent.includes(selectedField)) {
         newAdvHPProfile = advHPProfile + factor*formattedHP;
         document.getElementById("examAdvancedProfile").innerHTML = newAdvHPProfile;
     }
