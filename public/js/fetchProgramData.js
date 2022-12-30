@@ -119,8 +119,8 @@ function populateSpecs(collection, program, selectId, db){
         // First get fields
         snapshot.data().fields.forEach(field => {
             var fieldOption = document.createElement('option');
-            option.value = field;
-            option.text = field;
+            fieldOption.value = field;
+            fieldOption.text = field;
 
             document.getElementById(selectId).appendChild(fieldOption)
         });
