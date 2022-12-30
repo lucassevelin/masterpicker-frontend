@@ -25,11 +25,11 @@ body{
 
 .grid-container {
     display: grid;
+    grid-template-columns: 72% 28%;
     grid-template-areas:
-        'header header header header header header'
-        'main main main main right right'
-        'footer footer footer footer footer footer';
-    grid-template-columns: auto auto auto auto 175px 175px;
+        'header header'
+        'main right'
+        'footer footer';
     gap: 10px;
     background-color: #2196F3;
     padding: 10px;
