@@ -140,7 +140,3 @@ function populateSpecs(collection, program, fieldSelectID, specSelectID, db){
         console.log("Done fetching specializations")
     });
   }
-
-  function sort2DArray(array, index) {
-    array.sort((a, b) => a[index] - b[index]);
-  }

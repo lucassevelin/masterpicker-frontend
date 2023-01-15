@@ -4,17 +4,21 @@ function selectCourse(checkbox) {
     var advHPProfile = parseInt(document.getElementById("examAdvancedProfile").innerHTML);
     var profileHP = parseInt(document.getElementById("examProfile").innerHTML);
 
-    var factor;
-    if (checkbox.checked) {
-        factor = 1;
-    } else {
-        factor = -1;
-    }
+    var courses = [];
 
     toggleHighlight(checkbox)
 
     const row = checkbox.parentElement.parentElement;
     var dataCells = row.cells;
+
+    var factor;
+    if (checkbox.checked) {
+        factor = 1;
+        courses.push([dataCells[1].textContent, dataCells[0].textContent, dataCells[5].textContent, dataCells[3].textContent, dataCells[4].textContent]);
+    } else {
+        factor = -1;
+        courses.splice([dataCells[1].textContent, dataCells[0].textContent, dataCells[5].textContent, dataCells[3].textContent, dataCells[4].textContent])
+    }
 
     // Update total HP
     var newTotalHP;
@@ -52,14 +56,27 @@ function selectCourse(checkbox) {
     // TODO: Count profile hp
 
     // Append course to table in right sidebar
-    var chosenTable = document.getElementById("chosenTable");
-    var chosenTableBody = chosenTable.getElementsByTagName("tbody")[0];
-    var newRow = chosenTableBody.insertRow();
+    var sortedCourses = sort2DArray(courses, 4);
+    sortedCourses.forEach(course => {
+        var chosenTable = document.getElementById("chosenTable");
+        var chosenTableBody = chosenTable.getElementsByTagName("tbody")[0];
+        var newRow = chosenTableBody.insertRow();
 
-    newRow.insertCell().appendChild(document.createTextNode(dataCells[1].textContent));
-    newRow.insertCell().appendChild(document.createTextNode(dataCells[0].textContent));
-    newRow.insertCell().appendChild(document.createTextNode(dataCells[5].textContent));
-    newRow.insertCell().appendChild(document.createTextNode(dataCells[3].textContent));
+        newRow.insertCell().appendChild(document.createTextNode(course[0]));
+        newRow.insertCell().appendChild(document.createTextNode(course[1]));
+        newRow.insertCell().appendChild(document.createTextNode(course[2]));
+        newRow.insertCell().appendChild(document.createTextNode(course[3]));
+        newRow.insertCell().appendChild(document.createTextNode(course[4]));
+    })
+
+    // var chosenTable = document.getElementById("chosenTable");
+    // var chosenTableBody = chosenTable.getElementsByTagName("tbody")[0];
+    // var newRow = chosenTableBody.insertRow();
+
+    // newRow.insertCell().appendChild(document.createTextNode(dataCells[1].textContent));
+    // newRow.insertCell().appendChild(document.createTextNode(dataCells[0].textContent));
+    // newRow.insertCell().appendChild(document.createTextNode(dataCells[5].textContent));
+    // newRow.insertCell().appendChild(document.createTextNode(dataCells[3].textContent));
 
     // Hide table if no courses are selected
     if(totalHP > 0 || advHP > 0 || advHPProfile > 0 || profileHP > 0) {
@@ -99,3 +116,7 @@ function updateCredits(tableID) {
         }
     checkedArray.forEach(selectCourse)
 }
+
+function sort2DArray(array, index) {
+    array.sort((a, b) => a[index] - b[index]);
+  }
