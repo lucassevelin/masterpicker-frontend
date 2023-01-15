@@ -51,6 +51,23 @@ function selectCourse(checkbox) {
     
     // TODO: Count profile hp
 
+    // Append course to table in right sidebar
+    var chosenTable = document.getElementById("chosenTable");
+    var chosenTableBody = chosenTable.getElementsByTagName("tbody")[0];
+    var newRow = chosenTableBody.insertRow();
+
+    newRow.insertCell().appendChild(document.createTextNode(dataCells[1].textContent));
+    newRow.insertCell().appendChild(document.createTextNode(dataCells[0].textContent));
+    newRow.insertCell().appendChild(document.createTextNode(dataCells[5].textContent));
+    newRow.insertCell().appendChild(document.createTextNode(dataCells[3].textContent));
+
+    // Hide table if no courses are selected
+    if(totalHP > 0 || advHP > 0 || advHPProfile > 0 || profileHP > 0) {
+        document.getElementById("chosenTable").classList.remove("hidden");
+    } else if (totalHP == 0 || advHP == 0 || advHPProfile == 0 || profileHP == 0) {
+        document.getElementById("chosenTable").classList.add("hidden");
+    }
+
 }
 
 function toggleHighlight(checkbox) {

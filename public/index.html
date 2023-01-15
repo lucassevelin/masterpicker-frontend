@@ -71,27 +71,39 @@
         </table>
       </div>
       <div class="right-grid">
-        <table id="checkExamTerms">
-          <tr>
-            <th colspan="2">Requirements for exam</th>
-          </tr>
-          <tr>
-            <td>Total points:</td>
-            <td><span id="examTotal">0</span>/300 hp</td>
-          </tr>
-          <tr>
-            <td>Advanced courses</td>
-            <td><span id="examAdvanced">0</span>/60 hp</td>
-          </tr>
-          <tr>
-            <td>Advanced courses (in field of study)</td>
-            <td><span id="examAdvancedProfile">0</span>/30 hp</td>
-          </tr>
-          <tr>
-            <td>Specialization courses</td>
-            <td><span id="examProfile">0</span>/60 hp</td>
-          </tr>
-        </table>
+        <div id="stickyTables">
+          <table id="checkExamTerms" class="tableRight">
+            <tr>
+              <th colspan="2">Requirements for exam</th>
+            </tr>
+            <tr>
+              <td>Total points:</td>
+              <td><span id="examTotal">0</span>/300 hp</td>
+            </tr>
+            <tr>
+              <td>Advanced courses:</td>
+              <td><span id="examAdvanced">0</span>/60 hp</td>
+            </tr>
+            <tr>
+              <td>Advanced courses (in field of study):</td>
+              <td><span id="examAdvancedProfile">0</span>/30 hp</td>
+            </tr>
+            <tr>
+              <td>Specialization courses:</td>
+              <td><span id="examProfile">0</span>/60 hp</td>
+            </tr>
+          </table>
+          <table id="chosenTable" class="tableRight">
+            <tr>
+              <th colspan="4">Chosen courses</th>
+            </tr>
+            <tr>
+              <td>Course code</td>
+              <td>Name</td>
+              <td>Credits</td>
+              <td>Timetable module</td>
+          </table>
+        </div>
       </div>
       <div class="footer-grid">
         <p class="footer"><a href="https://github.com/lucassevelin/masterpicker-frontend">Open source project</a> based on <span id="load">Firebase SDK, Loading&hellip;</span></p> 
@@ -105,7 +117,35 @@
     <script>
       document.getElementById("copyrightYear").innerHTML =  new Date().getFullYear();
 
-      window.addEventListener('scroll', stickyTable('checkExamTerms'));
+      // Get the element you want to add the class to
+      const element = document.querySelector('#stickyTables');
+
+      // Get the position of the element on the page
+      const elementPosition = element.getBoundingClientRect().top;
+
+      // Set the threshold for when the class should be added (in this case, when the element is at the top of the viewport)
+      const threshold = 300;
+
+      // Create a function that adds the class to the element when the threshold is met
+      const addClassOnTop = () => {
+        // Get the current position of the top of the viewport
+        const currentPosition = window.pageYOffset;
+
+        // Check if the current position of the viewport is greater than or equal to the threshold
+        if (currentPosition >= threshold) {
+          // Add the class to the element
+          element.classList.add('fixedElement');
+        } else {
+          // Remove the class from the element
+          element.classList.remove('fixedElement');
+        }
+      }
+
+      // Call the function on page load
+      addClassOnTop();
+
+      // Listen for scroll events and call the function when they occur
+      window.addEventListener('scroll', addClassOnTop);
 
       document.addEventListener('DOMContentLoaded', function() {
         const loadEl = document.querySelector('#load');

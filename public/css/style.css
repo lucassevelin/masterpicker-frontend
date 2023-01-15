@@ -94,15 +94,23 @@ select {
     background-color: rgba(231, 215, 202, 0.5);
 }
 
-#checkExamTerms {
+.tableRight {
     padding: 0;
     margin: 0;
-    position: absolute;
-    right: 2vw;
-    margin-bottom: 5rem;
+    border: 0;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
 }
 
 th, tr, td {
+    padding: 0;
+    margin: 0;
+}
+
+.fixedElement {
+    position: fixed;
+    top: 0;
+    z-index: 100;
     padding: 0;
     margin: 0;
 }
