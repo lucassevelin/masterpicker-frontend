@@ -22,11 +22,11 @@ function selectCourse(checkbox) {
     var factor;
     if (checkbox.checked) {
         factor = 1;
-        prevCoursesArray.push([dataCells[1].textContent, dataCells[0].textContent, dataCells[5].textContent, dataCells[3].textContent, dataCells[4].textContent]);
+        prevCoursesArray.push([dataCells[1].textContent, dataCells[0].textContent, dataCells[5].textContent, dataCells[3].textContent, dataCells[2].textContent]);
         console.log("Adding");
     } else {
         factor = -1;
-        prevCoursesArray.splice([dataCells[1].textContent, dataCells[0].textContent, dataCells[5].textContent, dataCells[3].textContent, dataCells[4].textContent])
+        prevCoursesArray.splice([dataCells[1].textContent, dataCells[0].textContent, dataCells[5].textContent, dataCells[3].textContent, dataCells[2].textContent])
         console.log("Removing")
     }
 
@@ -73,7 +73,7 @@ function selectCourse(checkbox) {
     for (let i = 2; i < chosenTableBody.rows.length; i++) {
         chosenTableBody.deleteRow(i);
     }
-    
+
     sortedCourses.forEach(course => {
        var newRow = chosenTableBody.insertRow();
 
