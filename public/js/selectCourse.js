@@ -4,21 +4,29 @@ function selectCourse(checkbox) {
     var advHPProfile = parseInt(document.getElementById("examAdvancedProfile").innerHTML);
     var profileHP = parseInt(document.getElementById("examProfile").innerHTML);
 
-    var courses = [];
-
     toggleHighlight(checkbox)
 
     const row = checkbox.parentElement.parentElement;
     var dataCells = row.cells;
 
+    prevCoursesArray = [];
+    var chosenTable = document.getElementById("chosenTable");
+    var chosenTableBody = chosenTable.getElementsByTagName("tbody")[0];
+
+    for (let i = 2; i < chosenTableBody.rows.length; i++) {
+        prevCoursesArray.push([chosenTableBody.rows[i].cells[0].textContent, chosenTableBody.rows[i].cells[1].textContent, chosenTableBody.rows[i].cells[2].textContent, 
+            chosenTableBody.rows[i].cells[3].textContent, chosenTableBody.rows[i].cells[4].textContent]);
+    }
+    console.log(prevCoursesArray)
+
     var factor;
     if (checkbox.checked) {
         factor = 1;
-        courses.push([dataCells[1].textContent, dataCells[0].textContent, dataCells[5].textContent, dataCells[3].textContent, dataCells[4].textContent]);
+        prevCoursesArray.push([dataCells[1].textContent, dataCells[0].textContent, dataCells[5].textContent, dataCells[3].textContent, dataCells[4].textContent]);
         console.log("Adding");
     } else {
         factor = -1;
-        courses.splice([dataCells[1].textContent, dataCells[0].textContent, dataCells[5].textContent, dataCells[3].textContent, dataCells[4].textContent])
+        prevCoursesArray.splice([dataCells[1].textContent, dataCells[0].textContent, dataCells[5].textContent, dataCells[3].textContent, dataCells[4].textContent])
         console.log("Removing")
     }
 
@@ -58,18 +66,14 @@ function selectCourse(checkbox) {
     // TODO: Count profile hp
 
     // Append course to table in right sidebar
-    var sortedCourses = courses.sort(function(a, b) {
+    var sortedCourses = prevCoursesArray.sort(function(a, b) {
         return a[4] - b[4];
       });
-    
-    var chosenTable = document.getElementById("chosenTable");
-    var chosenTableBody = chosenTable.getElementsByTagName("tbody")[0];
 
     for (let i = 2; i < chosenTableBody.rows.length; i++) {
         chosenTableBody.deleteRow(i);
     }
-
-    console.log(sortedCourses)
+    
     sortedCourses.forEach(course => {
        var newRow = chosenTableBody.insertRow();
 
@@ -87,6 +91,7 @@ function selectCourse(checkbox) {
         document.getElementById("chosenTable").classList.add("hidden");
     }
 
+    return sortedCourses;
 }
 
 function toggleHighlight(checkbox) {

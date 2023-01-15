@@ -96,10 +96,8 @@ select {
 
 .tableRight {
     padding: 0;
-    margin: 0;
+    margin: 0 0.5rem 1rem 1rem;
     border: 0;
-    margin-bottom: 1rem;
-    margin-left: 1rem;
 }
 
 th, tr, td {
