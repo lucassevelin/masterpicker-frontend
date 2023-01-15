@@ -69,6 +69,9 @@ function selectCourse(checkbox) {
     var sortedCourses = prevCoursesArray.sort(function(a, b) {
         return a[4] - b[4];
       });
+      
+    console.log("Sorted:")
+    console.log(sortedCourses)
 
     for (let i = 2; i < chosenTableBody.rows.length; i++) {
         chosenTableBody.deleteRow(i);
