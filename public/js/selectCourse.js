@@ -69,6 +69,7 @@ function selectCourse(checkbox) {
         chosenTableBody.deleteRow(i);
     }
 
+    console.log(sortedCourses)
     sortedCourses.forEach(course => {
        var newRow = chosenTableBody.insertRow();
 
