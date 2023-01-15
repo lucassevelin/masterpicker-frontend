@@ -189,7 +189,9 @@
       })
 
       // Recount points when field is changed
-      document.getElementById('fieldSelect').addEventListener('change', updateCredits('programDataTable'))
+      if(document.getElementById('fieldSelect').childElementCount > 1) {
+        document.getElementById('fieldSelect').addEventListener('change', updateCredits('programDataTable'))
+      }
 
       //window.onload = populateSelect('programmes', 'programSelect');
     </script>

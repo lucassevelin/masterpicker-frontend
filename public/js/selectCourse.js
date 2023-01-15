@@ -64,6 +64,11 @@ function selectCourse(checkbox) {
     sortedCourses.forEach(course => {
         var chosenTable = document.getElementById("chosenTable");
         var chosenTableBody = chosenTable.getElementsByTagName("tbody")[0];
+
+        for (let i = 2; i < chosenTableBody.rows.length; i++) {
+            chosenTableBody.deleteRow(i);
+        }
+
         var newRow = chosenTableBody.insertRow();
 
         newRow.insertCell().appendChild(document.createTextNode(course[0]));
