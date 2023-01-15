@@ -15,9 +15,11 @@ function selectCourse(checkbox) {
     if (checkbox.checked) {
         factor = 1;
         courses.push([dataCells[1].textContent, dataCells[0].textContent, dataCells[5].textContent, dataCells[3].textContent, dataCells[4].textContent]);
+        console.log("Adding");
     } else {
         factor = -1;
         courses.splice([dataCells[1].textContent, dataCells[0].textContent, dataCells[5].textContent, dataCells[3].textContent, dataCells[4].textContent])
+        console.log("Removing")
     }
 
     // Update total HP
@@ -69,19 +71,10 @@ function selectCourse(checkbox) {
         newRow.insertCell().appendChild(document.createTextNode(course[4]));
     })
 
-    // var chosenTable = document.getElementById("chosenTable");
-    // var chosenTableBody = chosenTable.getElementsByTagName("tbody")[0];
-    // var newRow = chosenTableBody.insertRow();
-
-    // newRow.insertCell().appendChild(document.createTextNode(dataCells[1].textContent));
-    // newRow.insertCell().appendChild(document.createTextNode(dataCells[0].textContent));
-    // newRow.insertCell().appendChild(document.createTextNode(dataCells[5].textContent));
-    // newRow.insertCell().appendChild(document.createTextNode(dataCells[3].textContent));
-
     // Hide table if no courses are selected
-    if(totalHP > 0 || advHP > 0 || advHPProfile > 0 || profileHP > 0) {
+    if(totalHP+factor*formattedHP > 0) {
         document.getElementById("chosenTable").classList.remove("hidden");
-    } else if (totalHP == 0 || advHP == 0 || advHPProfile == 0 || profileHP == 0) {
+    } else if (totalHP+factor*formattedHP == 0) {
         document.getElementById("chosenTable").classList.add("hidden");
     }
 
