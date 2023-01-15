@@ -58,7 +58,9 @@ function selectCourse(checkbox) {
     // TODO: Count profile hp
 
     // Append course to table in right sidebar
-    var sortedCourses = sort2DArray(courses, 4);
+    var sortedCourses = courses.sort(function(a, b) {
+        return a[4] - b[4];
+      });
     sortedCourses.forEach(course => {
         var chosenTable = document.getElementById("chosenTable");
         var chosenTableBody = chosenTable.getElementsByTagName("tbody")[0];
@@ -109,7 +111,3 @@ function updateCredits(tableID) {
         }
     checkedArray.forEach(selectCourse)
 }
-
-function sort2DArray(array, index) {
-    array.sort((a, b) => a[index] - b[index]);
-  }
