@@ -115,7 +115,6 @@ function toggleHighlight(checkbox) {
 }
 
 function updateCredits(tableID) {
-    resetTable("chosenTable", 2);
     var table = document.getElementById(tableID);
         var checkedArray = [];
 
