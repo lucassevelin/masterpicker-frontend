@@ -182,10 +182,11 @@
       document.getElementById('programSelect').addEventListener('change',
       function(){
         dataArray = fetchProgramData(document.getElementById('programSelect').value, "programDataTable", "programmes");
-        document.getElementById('specSelect').classList.remove('hidden')
-        document.getElementById('specSelectLabel').classList.remove('hidden')
-        document.getElementById('fieldSelect').classList.remove('hidden')
-        document.getElementById('fieldSelectLabel').classList.remove('hidden')
+        document.getElementById('specSelect').classList.remove('hidden');
+        document.getElementById('specSelectLabel').classList.remove('hidden');
+        document.getElementById('fieldSelect').classList.remove('hidden');
+        document.getElementById('fieldSelectLabel').classList.remove('hidden');
+        resetCredits();
       })
 
       // Recount points when field is changed

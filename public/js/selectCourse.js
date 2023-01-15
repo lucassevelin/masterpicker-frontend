@@ -69,7 +69,7 @@ function selectCourse(checkbox) {
     var sortedCourses = prevCoursesArray.sort(function(a, b) {
         return a[4] - b[4];
       });
-      
+
     console.log("Sorted:")
     console.log(sortedCourses)
 
@@ -115,6 +115,7 @@ function toggleHighlight(checkbox) {
 }
 
 function updateCredits(tableID) {
+    resetTable("chosenTable", 2);
     var table = document.getElementById(tableID);
         var checkedArray = [];
 
@@ -124,5 +125,23 @@ function updateCredits(tableID) {
             checkedArray.push(checkbox);
           }
         }
-    checkedArray.forEach(selectCourse)
+    //checkedArray.forEach(selectCourse)
+}
+
+function resetCredits() {
+    document.getElementById("examTotal").innerHTML = 0;
+    document.getElementById("examAdvanced").innerHTML = 0;
+    document.getElementById("examAdvancedProfile").innerHTML = 0;
+    document.getElementById("examProfile").innerHTML = 0;
+
+    resetTable("chosenTable", 2);
+}
+
+function resetTable(resetTableID, startIndex) {
+    var table = document.getElementById(resetTableID);
+    var tableBody = table.getElementsByTagName("tbody")[0];
+
+    for (let i = startIndex; i < tableBody.rows.length; i++) {
+        tableBody.deleteRow(i);
+    }
 }
