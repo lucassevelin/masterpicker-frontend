@@ -51,7 +51,7 @@ function selectCourse(checkbox) {
     var newAdvHPProfile;
     if (dataCells[8].textContent.includes("A") && dataCells[7].textContent.includes(selectedField)) {
         newAdvHPProfile = advHPProfile + factor*formattedHP;
-        console.log("New advance HP profile: " + newAdvHPProfile)
+        //console.log("New advance HP profile: " + newAdvHPProfile)
         document.getElementById("examAdvancedProfile").innerHTML = newAdvHPProfile;
     }
     
@@ -61,21 +61,22 @@ function selectCourse(checkbox) {
     var sortedCourses = courses.sort(function(a, b) {
         return a[4] - b[4];
       });
+    
+    var chosenTable = document.getElementById("chosenTable");
+    var chosenTableBody = chosenTable.getElementsByTagName("tbody")[0];
+
+    for (let i = 2; i < chosenTableBody.rows.length; i++) {
+        chosenTableBody.deleteRow(i);
+    }
+
     sortedCourses.forEach(course => {
-        var chosenTable = document.getElementById("chosenTable");
-        var chosenTableBody = chosenTable.getElementsByTagName("tbody")[0];
+       var newRow = chosenTableBody.insertRow();
 
-        for (let i = 2; i < chosenTableBody.rows.length; i++) {
-            chosenTableBody.deleteRow(i);
-        }
-
-        var newRow = chosenTableBody.insertRow();
-
-        newRow.insertCell().appendChild(document.createTextNode(course[0]));
-        newRow.insertCell().appendChild(document.createTextNode(course[1]));
-        newRow.insertCell().appendChild(document.createTextNode(course[2]));
-        newRow.insertCell().appendChild(document.createTextNode(course[3]));
-        newRow.insertCell().appendChild(document.createTextNode(course[4]));
+        newRow.insertCell().appendChild(document.createTextNode(course[0])); // Course code
+        newRow.insertCell().appendChild(document.createTextNode(course[1])); // Course name
+        newRow.insertCell().appendChild(document.createTextNode(course[2])); // Course credits
+        newRow.insertCell().appendChild(document.createTextNode(course[3])); // Course timetable module
+        newRow.insertCell().appendChild(document.createTextNode(course[4])); // Course period
     })
 
     // Hide table if no courses are selected
@@ -90,9 +91,9 @@ function selectCourse(checkbox) {
 function toggleHighlight(checkbox) {
     console.log("Running coloring function")
     var element = checkbox.parentNode.parentNode
-    console.log(element)
+    //console.log(element)
     var currColor = element.style.fontSize;
-    console.log(currColor)
+    //console.log(currColor)
     if (currColor == null || currColor == "") {
         console.log("Unable to get color")
     } else {

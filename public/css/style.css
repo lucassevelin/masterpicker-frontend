@@ -109,7 +109,7 @@ th, tr, td {
 
 .fixedElement {
     position: fixed;
-    top: 0;
+    top: 2rem;
     z-index: 100;
     padding: 0;
     margin: 0;
